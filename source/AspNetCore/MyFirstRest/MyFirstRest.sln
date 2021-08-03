@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFirstRest", "MyFirstRest\MyFirstRest.csproj", "{9F122E53-1008-4DED-8C98-643F82AA46D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFirstRest.Tests", "MyFirstRest.Tests\MyFirstRest.Tests.csproj", "{B41D8399-F05F-4F34-BB86-E947AA066F74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F122E53-1008-4DED-8C98-643F82AA46D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F122E53-1008-4DED-8C98-643F82AA46D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F122E53-1008-4DED-8C98-643F82AA46D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F122E53-1008-4DED-8C98-643F82AA46D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B41D8399-F05F-4F34-BB86-E947AA066F74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B41D8399-F05F-4F34-BB86-E947AA066F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B41D8399-F05F-4F34-BB86-E947AA066F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B41D8399-F05F-4F34-BB86-E947AA066F74}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

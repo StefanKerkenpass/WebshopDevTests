@@ -1,0 +1,56 @@
+﻿[
+  {
+    "Name": "Laptop",
+    "Price": 1600,
+    "Number": "01",
+    "Description": "Laptop"
+  },
+  {
+    "Name": "PC",
+    "Price": 1300,
+    "Number": "02",
+    "Description": "PC"
+  },
+  {
+    "Name": "Netzwerkkabel",
+    "Price": 19,
+    "Number": "03",
+    "Description": "Netzwerkkabel"
+  },
+  {
+    "Name": "Laptop",
+    "Price": 1600,
+    "Number": "04",
+    "Description": "Laptop"
+  },
+  {
+    "Name": "PC",
+    "Price": 1300,
+    "Number": "05",
+    "Description": "PC"
+  },
+  {
+    "Name": "Netzwerkkabel",
+    "Price": 19,
+    "Number": "06",
+    "Description": "Netzwerkkabel"
+  }
+,	{
+  "Name": "Laptop",
+  "Price": 1600,
+  "Number": "07",
+  "Description": "Laptop"
+},
+  {
+    "Name": "PC",
+    "Price": 1300,
+    "Number": "08",
+    "Description": "PC"
+  },
+  {
+    "Name": "Netzwerkkabel",
+    "Price": 19,
+    "Number": "09",
+    "Description": "Netzwerkkabel"
+  }
+]
