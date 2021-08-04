@@ -2383,11 +2383,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj",
+      "projectUniqueName": "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj",
       "projectName": "MyFirstRest",
-      "projectPath": "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj",
+      "projectPath": "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj",
       "packagesPath": "C:\\Users\\PRAKTIKANT\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest\\obj\\",
+      "outputPath": "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PRAKTIKANT\\AppData\\Roaming\\NuGet\\NuGet.Config"

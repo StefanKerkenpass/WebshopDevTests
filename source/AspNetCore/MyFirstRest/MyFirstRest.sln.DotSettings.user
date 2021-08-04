@@ -3,7 +3,7 @@
   &lt;Assembly Path="C:\Users\PRAKTIKANT\.nuget\packages\microsoft.entityframeworkcore\5.0.8\lib\netstandard2.1\Microsoft.EntityFrameworkCore.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\PRAKTIKANT\RiderProjects\MyFirstRest\MyFirstRest\bin\Debug\net5.0\ref\MyFirstRest.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\PRAKTIKANT\AppData\Local\JetBrains\Rider2021.2\resharper-host\temp\Rider\vAny\CoverageData\_MyFirstRest.-114013638\Snapshot\snapshot.utdcvr</s:String>
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2c2baba9_002Da85f_002D4515_002Dbad4_002Da72c571199fa/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;MyFirstRest.Tests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="C:\Users\PRAKTIKANT\RiderProjects\MyFirstRest\MyFirstRest.Tests" Presentation="&amp;lt;MyFirstRest.Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>

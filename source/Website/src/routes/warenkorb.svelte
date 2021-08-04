@@ -66,61 +66,116 @@
 	// });
 </script>
 
-Zurück zur <a href="/list">Produktliste</a>.
+<div class="test">
+	<ul class="navbarUl">
+		<li class="navbarLi" style="margin-left: 5px;">
+			<a href="/list">Zur Produktliste</a>
+		</li>
+		<li class="navbarLi">
+			<a href="/warenkorb" class="active">Zum Warenkorb</a>
+		</li>
+		<li class="navbarLi" style="float:right;margin-right: 10px;">
+			<a href="#signIn">Anmeldung</a>
+		</li>
+	</ul>
 
-{#await shoppingCartPromise}
-	<p>Lade...</p>
-{:then shoppingCart}
-	<table>
-		<tr>
-			<th>Nummer</th>
-			<th>Name</th>
-			<th>Preis</th>
-			<th>Beschreibung</th>
-			<th>Anzahl</th>
-		</tr>
-		{#each shoppingCart.positions as position}
-			<tr>
-				<td>
-					{position.article.number}
-				</td>
-				<td>
-					{position.article.name}
-				</td>
-				<td>
-					{position.article.price}
-				</td>
-				<td>
-					{position.article.description}
-				</td>
-				<td>
-					<label>
-						<input
-							type="number"
-							on:change={() => updatePrice()}
-							bind:value={position.quantity}
-							min="1"
-							max="1000"
-						/>
-					</label>
-				</td>
-				<td>
-					<button on:click={() => deleteData(position.id)}>
-						Artikel {position.article.number} löschen
-					</button>
-				</td>
-			</tr>
-		{/each}
-	</table>
+	<div style="padding:20px;margin-top:100px;">
+		{#await shoppingCartPromise}
+			<p>Lade...</p>
+		{:then shoppingCart}
+			<table>
+				<tr>
+					<th>Nummer</th>
+					<th>Name</th>
+					<th>Preis</th>
+					<th>Beschreibung</th>
+					<th>Anzahl</th>
+				</tr>
+				{#each shoppingCart.positions as position}
+					<tr>
+						<td>
+							{position.article.number}
+						</td>
+						<td>
+							{position.article.name}
+						</td>
+						<td>
+							{position.article.price}
+						</td>
+						<td>
+							{position.article.description}
+						</td>
+						<td>
+							<label>
+								<input
+									type="number"
+									on:change={() => updatePrice()}
+									bind:value={position.quantity}
+									min="1"
+									max="1000"
+								/>
+							</label>
+						</td>
+						<td>
+							<button on:click={() => deleteData(position.id)}>
+								Artikel {position.article.number} löschen
+							</button>
+						</td>
+					</tr>
+				{/each}
+			</table>
 
-	<pre>{JSON.stringify(shoppingCart, null, 2)}</pre>
-{:catch e}
-	<p>{e.message}</p>
-{/await}
+			<pre>{JSON.stringify(shoppingCart, null, 2)}</pre>
+		{:catch e}
+			<p>{e.message}</p>
+		{/await}
 
-<button>
-	{finalPrice.toLocaleString('de', { maximumFractionDigits: 2, minimumFractionDigits: 2 })}
-</button>
+		<button>
+			{finalPrice.toLocaleString('de', { maximumFractionDigits: 2, minimumFractionDigits: 2 })}
+		</button>
+	</div>
+</div>
 
 <style>
+	table{
+		text-align: center;
+		width: 900px;
+		border-radius: 20px;
+		border: solid 1px #5AFFFF;
+		background-color: white;
+		box-shadow: 1px 1px 20px #5AFFFF , -1px -1px 20px #5AFFFF;
+		margin-top: 40px;
+	}
+	.navbarUl {
+		list-style-type: none;
+		margin-top: 20px;
+		padding: 0;
+		overflow: hidden;
+		background-color: #5AFFFF;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		box-shadow: 1px 1px 20px #5AFFFF , -1px -1px 20px #5AFFFF;
+		border-radius: 10px;
+	}
+
+	.navbarLi {
+		float: left;
+	}
+	.navbarLi a {
+		display: block;
+		color: black;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+	}
+	.navbarLi a:hover {
+		background-color: #5adfff;
+	}
+	.navbarLi:last-child {
+		border-right: none;
+	}
+	.active {
+		background-color: #5adfff;
+	}
 </style>

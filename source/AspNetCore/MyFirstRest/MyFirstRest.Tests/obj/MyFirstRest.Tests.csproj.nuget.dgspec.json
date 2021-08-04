@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest.Tests\\MyFirstRest.Tests.csproj": {}
+    "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest.Tests\\MyFirstRest.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest.Tests\\MyFirstRest.Tests.csproj": {
+    "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest.Tests\\MyFirstRest.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest.Tests\\MyFirstRest.Tests.csproj",
+        "projectUniqueName": "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest.Tests\\MyFirstRest.Tests.csproj",
         "projectName": "MyFirstRest.Tests",
-        "projectPath": "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest.Tests\\MyFirstRest.Tests.csproj",
+        "projectPath": "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest.Tests\\MyFirstRest.Tests.csproj",
         "packagesPath": "C:\\Users\\PRAKTIKANT\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest.Tests\\obj\\",
+        "outputPath": "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PRAKTIKANT\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj": {
-                "projectPath": "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj"
+              "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj": {
+                "projectPath": "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj"
               }
             }
           }
@@ -85,14 +85,14 @@
         }
       }
     },
-    "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj": {
+    "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj",
+        "projectUniqueName": "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj",
         "projectName": "MyFirstRest",
-        "projectPath": "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj",
+        "projectPath": "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest\\MyFirstRest.csproj",
         "packagesPath": "C:\\Users\\PRAKTIKANT\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PRAKTIKANT\\RiderProjects\\MyFirstRest\\MyFirstRest\\obj\\",
+        "outputPath": "C:\\Projects\\NewSteam\\source\\AspNetCore\\MyFirstRest\\MyFirstRest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PRAKTIKANT\\AppData\\Roaming\\NuGet\\NuGet.Config"
