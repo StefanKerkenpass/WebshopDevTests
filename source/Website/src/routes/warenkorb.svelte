@@ -1,8 +1,8 @@
 <script>
 	import { articles } from '$lib/articles11';
 	import ArticleInfo from '$lib/components/ArticleInfo.svelte';
-
-	let shoppingCartValue;
+	import Fa from 'svelte-fa/src/fa.svelte';
+	import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 	async function loadData() {
 		const response = await fetch('https://localhost:5001/ShoppingCart/Exact', {
@@ -14,12 +14,30 @@
 		if (response.status == 204) {
 			return { positions: [] };
 		}
-		shoppingCartValue = await response.json();
-		return shoppingCartValue;
+		return await response.json();
+	}
+
+	async function postQuantity(a, b) {
+		const response = await fetch('https://localhost:5001/ShoppingCart', {
+			method: 'post',
+			credentials: 'include',
+			headers: {
+				Accept: 'application/json, text/plain, */*',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ articleNumber: a, quantity: b })
+		});
+		if (!response.ok) {
+			throw new Error('Anfrage kaputt');
+		}
+		if (response.status == 204) {
+			return { positions: [] };
+		}
+		shoppingCartPromise = await response.json();
 	}
 
 	async function deleteData(i) {
-		await fetch('https://localhost:5001/ShoppingCart/Delete', {
+		const response = await fetch('https://localhost:5001/ShoppingCart/Delete', {
 			method: 'DELETE',
 			credentials: 'include',
 			headers: {
@@ -28,30 +46,17 @@
 			body: JSON.stringify({ Id: i })
 		});
 
-		shoppingCartPromise = loadData();
+		if (!response.ok) {
+			throw new Error('Anfrage kaputt');
+		}
+		if (response.status == 204) {
+			return { positions: [] };
+		}
+
+		shoppingCartPromise = await response.json();
 	}
 
 	let shoppingCartPromise = loadData();
-
-	function getTotalPrice() {
-		console.log('Updating prices');
-		if (shoppingCartValue == null) return 0;
-		let totalPrice = 0;
-		const positions = shoppingCartValue.positions;
-		for (let index = 0; index < positions.length; index++) {
-			const { article, quantity } = positions[index];
-			totalPrice = totalPrice + article.price * quantity;
-		}
-
-		shoppingCartValue = { ...shoppingCartValue };
-
-		return totalPrice;
-	}
-
-	let finalPrice = 0;
-	function updatePrice() {
-		finalPrice = getTotalPrice();
-	}
 
 	// onMount(async () => {
 	// 	articles  = await loadData()
@@ -74,16 +79,20 @@
 		<li class="navbarLi">
 			<a href="/warenkorb" class="active">Zum Warenkorb</a>
 		</li>
+		<li class="navbarLi">
+			<img src="src/sketch1627996851978.png" alt="Logo" class="logo" />
+		</li>
 		<li class="navbarLi" style="float:right;margin-right: 10px;">
 			<a href="#signIn">Anmeldung</a>
 		</li>
+		
 	</ul>
 
 	<div style="padding:20px;margin-top:100px;">
 		{#await shoppingCartPromise}
 			<p>Lade...</p>
 		{:then shoppingCart}
-			<table>
+			<table class="table1">
 				<tr>
 					<th>Nummer</th>
 					<th>Name</th>
@@ -109,7 +118,7 @@
 							<label>
 								<input
 									type="number"
-									on:change={() => updatePrice()}
+									on:change={() => postQuantity(position.article.number, position.quantity)}
 									bind:value={position.quantity}
 									min="1"
 									max="1000"
@@ -118,45 +127,89 @@
 						</td>
 						<td>
 							<button on:click={() => deleteData(position.id)}>
-								Artikel {position.article.number} löschen
+								<Fa icon={faTrashAlt} size="2x" />
 							</button>
 						</td>
 					</tr>
 				{/each}
 			</table>
-
-			<pre>{JSON.stringify(shoppingCart, null, 2)}</pre>
+			<table class="table2">
+				<tr>
+					<th>
+						Gesamtpreis
+					</th>
+				</tr>
+				
+				<tr>
+					<td>
+						<div style="color: red;">
+							<p>
+								{shoppingCart.totalPrice.toLocaleString('de', {
+									maximumFractionDigits: 2,
+									minimumFractionDigits: 2
+								})}
+							</p>
+						</div>
+					</td>
+					<td>
+						<button>Jetzt kaufen</button>
+					</td>
+				</tr>
+			</table>
 		{:catch e}
 			<p>{e.message}</p>
 		{/await}
-
-		<button>
-			{finalPrice.toLocaleString('de', { maximumFractionDigits: 2, minimumFractionDigits: 2 })}
-		</button>
 	</div>
 </div>
 
 <style>
-	table{
+	.table1 {
 		text-align: center;
-		width: 900px;
-		border-radius: 20px;
-		border: solid 1px #5AFFFF;
+		width: 100%;
+		border: solid 2px black;
 		background-color: white;
-		box-shadow: 1px 1px 20px #5AFFFF , -1px -1px 20px #5AFFFF;
 		margin-top: 40px;
+		padding: 5px;
+	}
+	.table1 th {
+		padding: 5px;
+	}
+	.table1 td {
+		border-top: solid 1px black;
+		padding: 5px;
+		margin: 0px;
+	}
+
+	.table2 {
+		text-align: center;
+		width: 100%;
+		border: solid 2px black;
+		background-color: white;
+		margin-top: 40px;
+		padding: 5px;
+	}
+	.table2 th {
+		padding: 5px;
+	}
+	.table2 td {
+		border-top: solid 1px black;
+		padding: 5px;
+		margin: 0px;
+	}
+
+	.logo {
+		width: 40px;
 	}
 	.navbarUl {
 		list-style-type: none;
+		width: 100%;
 		margin-top: 20px;
 		padding: 0;
 		overflow: hidden;
-		background-color: #5AFFFF;
-		position: fixed;
+		background-color: black;
+		position: -webkit-sticky;
+		position: sticky;
 		top: 0;
-		width: 100%;
-		box-shadow: 1px 1px 20px #5AFFFF , -1px -1px 20px #5AFFFF;
-		border-radius: 10px;
 	}
 
 	.navbarLi {
@@ -164,18 +217,25 @@
 	}
 	.navbarLi a {
 		display: block;
-		color: black;
+		color: white;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+	}
+	.navbarLi img {
+		display: block;
+		color: white;
 		text-align: center;
 		padding: 14px 16px;
 		text-decoration: none;
 	}
 	.navbarLi a:hover {
-		background-color: #5adfff;
+		background-color: gray;
 	}
 	.navbarLi:last-child {
 		border-right: none;
 	}
 	.active {
-		background-color: #5adfff;
+		background-color: grey;
 	}
 </style>

@@ -1,9 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyFirstRest.Model
 {
     public class BillHead
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
+
         public DateTime Date { get; set; }
         public string Salutation { get; set; }
         public string FirstName { get; set; }
@@ -14,5 +21,6 @@ namespace MyFirstRest.Model
         public string Street { get; set; }
         public string InvoiceNumber { get; set; }
         public double TotalPrice { get; set; }
+        public List<BillPosition> Positions { get; protected set; } = new();
     }
 }

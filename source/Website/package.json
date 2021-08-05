@@ -17,5 +17,9 @@
     "prettier-plugin-svelte": "^2.2.0",
     "svelte": "^3.34.0"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "svelte-fa": "^2.2.1"
+  }
 }

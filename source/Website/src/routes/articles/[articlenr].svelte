@@ -1,6 +1,8 @@
 <script>
 	import { page } from '$app/stores';
 	import ArticleInfo from '$lib/components/ArticleInfo.svelte';
+	import Fa from 'svelte-fa/src/fa.svelte';
+	import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 	let params = $page.params;
 	let showShoppingCart = false;
@@ -68,7 +70,7 @@
 			<p>{e.message}</p>
 		{/await}
 
-		<button class="fadein" on:click={postData}>In den Warenkorb</button>
+		<button class="fadein" on:click={postData}><Fa icon={faCartArrowDown} size="4x"/></button>
 		<label>
 			<input type="number" bind:value={i} min="1" max="1000" />
 		</label>

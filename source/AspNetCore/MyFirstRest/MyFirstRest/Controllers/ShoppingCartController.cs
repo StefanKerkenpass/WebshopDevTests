@@ -27,14 +27,14 @@ namespace MyFirstRest.Controllers
         }
 
         [HttpGet("Exact")]
-        public ShoppingCart GetExact()
+        public ShoppingCart? GetExact()
         {
             HttpContext.Request.Cookies.TryGetValue("cartId", out var id);
-            var exactArticle = _context.ShoppingCarts
+            var shoppingCart = _context.ShoppingCarts
                 .Include(cart => cart.Positions)
                 .ThenInclude(position => position.Article)
                 .FirstOrDefault(cart => cart.Id == id);
-            return exactArticle;
+            return shoppingCart;
         }
 
         [HttpPost()]
@@ -47,7 +47,7 @@ namespace MyFirstRest.Controllers
 
             HttpContext.Request.Cookies.TryGetValue("cartId", out var cartId);
 
-            ShoppingCart cart;
+            ShoppingCart? cart;
 
             // Den ShoppingCart suchen
             if (cartId == null)
@@ -60,18 +60,25 @@ namespace MyFirstRest.Controllers
             }
             else
             {
-                cart = _context.ShoppingCarts.Find(cartId);
+                cart = _context.ShoppingCarts
+                    .Include(x => x.Positions)
+                    .ThenInclude(x => x.Article)
+                    .SingleOrDefault(x => x.Id == cartId);
                 //   Wenn nicht gefunden, dann Fehlermeldung
                 if (cart == null)
                 {
-                    return BadRequest("Cart not found");
+                    cart = new ShoppingCart()
+                    {
+                        Id = _shoppingCartIdGenerator.GenerateId()
+                    };
+                    _context.ShoppingCarts.Add(cart);
                 }
             }
 
 
             //   Wenn gefunden:
             //     -Artikel im WarenKorb suchen
-            ShoppingCartPosition? position = _context
+            var position = _context
                 .ShoppingCartPositions
                 .FirstOrDefault(pos => pos.ShoppingCart == cart && pos.Article.Number == request.ArticleNumber);
 
@@ -106,7 +113,7 @@ namespace MyFirstRest.Controllers
                 Expires = DateTimeOffset.Now.AddDays(14),
             });
 
-            return Ok();
+            return Json(cart);
         }
 
         [HttpDelete("Delete")]
@@ -117,11 +124,13 @@ namespace MyFirstRest.Controllers
 
             HttpContext.Request.Cookies.TryGetValue("cartId", out var cartIdDelete);
 
-            ShoppingCart cartDelete;
+            ShoppingCart? cartDelete;
 
             // Den ShoppingCart suchen
 
-            cartDelete = _context.ShoppingCarts.Find(cartIdDelete);
+            cartDelete = _context.ShoppingCarts.Include(x => x.Positions)
+                .ThenInclude(x => x.Article)
+                .SingleOrDefault(x => x.Id == cartIdDelete);
             //   Wenn nicht gefunden, dann Fehlermeldung
             if (cartDelete == null)
             {
@@ -139,7 +148,7 @@ namespace MyFirstRest.Controllers
             {
                 return BadRequest("Position not found");
             }
-            
+
             // -wenn gefunden, dann Position löschen
             _context.ShoppingCartPositions.Remove(positionDelete);
 
@@ -153,7 +162,7 @@ namespace MyFirstRest.Controllers
                 Expires = DateTimeOffset.Now.AddDays(14),
             });
 
-            return Ok();
+            return Json(cartDelete);
 
 
             //     StreamReader r = new StreamReader("articles.json");
@@ -189,6 +198,12 @@ namespace MyFirstRest.Controllers
 
 
         public class UpdateArticleRequest
+        {
+            public string? ArticleNumber { get; set; }
+            public int? Quantity { get; set; }
+        }
+
+        public class UpdateArticleQuantityRequest
         {
             public string? ArticleNumber { get; set; }
             public int? Quantity { get; set; }
