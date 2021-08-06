@@ -8,6 +8,9 @@ namespace MyFirstRest.Model
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ShoppingCartPosition> ShoppingCartPositions { get; set; }
         
+        public DbSet<BillHead> BillHeads { get; set; }
+        public DbSet<BillPosition> BillPosition { get; set; }
+        
         protected StoreContext()
         {
         }

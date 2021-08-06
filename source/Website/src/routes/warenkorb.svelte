@@ -1,8 +1,8 @@
 <script>
-	import { articles } from '$lib/articles11';
-	import ArticleInfo from '$lib/components/ArticleInfo.svelte';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+	import { goto } from '$app/navigation';
+	import { null_to_empty } from 'svelte/internal';
 
 	async function loadData() {
 		const response = await fetch('https://localhost:5001/ShoppingCart/Exact', {
@@ -36,14 +36,14 @@
 		shoppingCartPromise = await response.json();
 	}
 
-	async function deleteData(i) {
+	async function deleteData(Id) {
 		const response = await fetch('https://localhost:5001/ShoppingCart/Delete', {
 			method: 'DELETE',
 			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ Id: i })
+			body: JSON.stringify({ Id: Id })
 		});
 
 		if (!response.ok) {
@@ -69,6 +69,13 @@
 	// 		})
 	// 	);
 	// });
+	function checkout(checkId) {
+		if (checkId == 0) {
+			window.alert('No Articles in your Shoppingcart');
+		} else {
+			goto('checkout');
+		}
+	}
 </script>
 
 <div class="test">
@@ -82,10 +89,6 @@
 		<li class="navbarLi">
 			<img src="src/sketch1627996851978.png" alt="Logo" class="logo" />
 		</li>
-		<li class="navbarLi" style="float:right;margin-right: 10px;">
-			<a href="#signIn">Anmeldung</a>
-		</li>
-		
 	</ul>
 
 	<div style="padding:20px;margin-top:100px;">
@@ -133,29 +136,41 @@
 					</tr>
 				{/each}
 			</table>
-			<table class="table2">
-				<tr>
-					<th>
-						Gesamtpreis
-					</th>
-				</tr>
-				
-				<tr>
-					<td>
-						<div style="color: red;">
-							<p>
-								{shoppingCart.totalPrice.toLocaleString('de', {
-									maximumFractionDigits: 2,
-									minimumFractionDigits: 2
-								})}
-							</p>
-						</div>
-					</td>
-					<td>
-						<button>Jetzt kaufen</button>
-					</td>
-				</tr>
-			</table>
+			<p>
+				{#if shoppingCart.positions.length != 0}
+					<table class="table2">
+						<tr>
+							<th> Gesamtpreis </th>
+						</tr>
+
+						<tr>
+							<td>
+								<div style="color: red;">
+									<p>
+										{shoppingCart.totalPrice.toLocaleString('de', {
+											maximumFractionDigits: 2,
+											minimumFractionDigits: 2
+										})}
+									</p>
+								</div>
+							</td>
+							<td>
+								<button on:click={() => checkout(shoppingCart.positions.length)}
+									>Jetzt kaufen</button
+								>
+							</td>
+						</tr>
+					</table>
+				{/if}
+			</p>
+
+			{#if shoppingCart.positions.length == 0}
+				<table class="table3">
+					<tr>
+						<td><a href="/list">Zur Artikelliste</a></td>
+					</tr>
+				</table>
+			{/if}
 		{:catch e}
 			<p>{e.message}</p>
 		{/await}
@@ -195,6 +210,24 @@
 		border-top: solid 1px black;
 		padding: 5px;
 		margin: 0px;
+	}
+
+	.table3 {
+		text-align: center;
+		width: 100%;
+		border: solid 2px black;
+		background-color: white;
+		margin-top: 40px;
+		padding: 5px;
+	}
+	.table3 td {
+		padding: 5px;
+		margin: 0px;
+	}
+	.table3 a {
+		text-decoration: none;
+		color: black;
+		font-size: larger;
 	}
 
 	.logo {

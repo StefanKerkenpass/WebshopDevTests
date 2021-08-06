@@ -1,5 +1,4 @@
 <script>
-	import { each } from 'svelte/internal';
 
 	let buttons = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 	let player = 1;

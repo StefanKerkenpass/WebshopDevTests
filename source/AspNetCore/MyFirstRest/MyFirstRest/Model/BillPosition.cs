@@ -11,14 +11,16 @@ namespace MyFirstRest.Model
         public Guid Id { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Positon { get; set; }
+        public int Position { get; set; }
 
         public string ArticleName { get; set; }
 
-        public double ArticlePrice { get; set; }
+        public decimal ArticlePrice { get; set; }
 
         public string ArticleNumber { get; set; }
 
         public int Quantity { get; set; }
+
+        public Guid BillHeadId { get; set; }
     }
 }

@@ -19,8 +19,7 @@ namespace MyFirstRest.Model
         public string Location { get; set; }
         public string ZipCode { get; set; }
         public string Street { get; set; }
-        public string InvoiceNumber { get; set; }
-        public double TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
         public List<BillPosition> Positions { get; protected set; } = new();
     }
 }

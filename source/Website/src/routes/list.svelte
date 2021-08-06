@@ -32,9 +32,6 @@
 	<li class="navbarLi">
 		<a href="/warenkorb">Zum Warenkorb</a>
 	</li>
-	<li class="navbarLi" style="float:right;margin-right: 10px;">
-		<a href="#signIn">Anmeldung</a>
-	</li>
 	<li class="navbarLi">
 		<img src="src/sketch1627996851978.png" alt="Logo" class="logo" />
 	</li>
@@ -49,6 +46,7 @@
 					<li class="articleListLi">
 						<!--<a href="/articles/{article.number}">-->
 							<div class="articles"><ArticleInfo {article} /></div>
+							
 						<!--</a>-->
 					</li>
 				{/each}

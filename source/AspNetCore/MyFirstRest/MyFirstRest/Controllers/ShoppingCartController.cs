@@ -116,6 +116,89 @@ namespace MyFirstRest.Controllers
             return Json(cart);
         }
 
+        [HttpPost("Bill")]
+        public IActionResult PostBill([FromBody] CheckOutRequest? request)
+        {
+            if (request == null) return BadRequest("Missing request data");
+            
+            HttpContext.Request.Cookies.TryGetValue("cartId", out var cartId);
+            
+            BillHead? bill;
+            ShoppingCart? cart;
+            BillPosition? position;
+            
+            cart = _context.ShoppingCarts
+                .Include(x => x.Positions)
+                .ThenInclude(x => x.Article)
+                .SingleOrDefault(x => x.Id == cartId);
+            //   Wenn nicht gefunden, dann Fehlermeldung
+            if (cart == null)
+            {
+                return BadRequest("Cart not found");
+            }
+            var cartPos = _context
+                .ShoppingCartPositions
+                .Include(x => x.Article)
+                .FirstOrDefault(pos => pos.ShoppingCart == cart);
+            var article = cartPos.Article;
+            if (article == null)
+            {
+                return BadRequest("No Articles in Cart");
+            }
+
+
+            bill = new BillHead()
+            {
+                Id = new Guid(),
+                Date = DateTime.Now,
+                Salutation = request.Salutation,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Country = request.Country,
+                Location = request.Location,
+                ZipCode = request.ZipCode,
+                Street = request.Street,
+                TotalPrice = cart.TotalPrice
+            };
+            _context.BillHeads.Add(bill);
+            
+            
+            
+            position = new BillPosition()
+            {
+                Id = new Guid(),
+                ArticleName = article.Name,
+                ArticlePrice = article.Price,
+                ArticleNumber = article.Number,
+                Quantity = cartPos.Quantity,
+                BillHeadId = bill.Id
+            };
+            _context.BillPosition.Add(position);
+            
+            if (bill != null)
+            {
+                cart = new ShoppingCart()
+                {
+                    Id = _shoppingCartIdGenerator.GenerateId()
+                };
+                _context.ShoppingCarts.Add(cart);
+            }
+            
+            _context.SaveChanges();
+            
+            HttpContext.Response.Cookies.Append("cartId", cart.Id, new CookieOptions
+            {
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                HttpOnly = true,
+                Expires = DateTimeOffset.Now.AddDays(14),
+            });
+            
+            return Json(bill);
+            
+        }
+
+
         [HttpDelete("Delete")]
         public IActionResult DeleteArticle([FromBody] DeleteArticleRequest? requestDelete)
         {
@@ -202,13 +285,20 @@ namespace MyFirstRest.Controllers
             public string? ArticleNumber { get; set; }
             public int? Quantity { get; set; }
         }
-
-        public class UpdateArticleQuantityRequest
+        
+        public class CheckOutRequest
         {
-            public string? ArticleNumber { get; set; }
-            public int? Quantity { get; set; }
+            public Guid Id { get; set; }
+            public DateTime Date { get; set; }
+            public string Salutation { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Country { get; set; }
+            public string Location { get; set; }
+            public string ZipCode { get; set; }
+            public string Street { get; set; }
         }
-
+        
         public class DeleteArticleRequest
         {
             public int Id { get; set; }
